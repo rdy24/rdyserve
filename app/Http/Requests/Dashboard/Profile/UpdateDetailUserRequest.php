@@ -13,7 +13,7 @@ class UpdateDetailUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateDetailUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'role' => 'nullable|string|max:100',
+            'contact_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|max:12',
+            'biography' => 'nullable|string|max:5000',
         ];
     }
 }

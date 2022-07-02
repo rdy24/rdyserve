@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RequestController extends Controller
 {
@@ -14,7 +16,9 @@ class RequestController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::where('buyer_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('pages.dashboard.request.index', compact('orders'));
     }
 
     /**
@@ -24,7 +28,7 @@ class RequestController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -35,7 +39,7 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -46,7 +50,10 @@ class RequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::where('id', $id)->first();
+
+        return view('pages.dashboard.request.detail', compact('order'));
+        
     }
 
     /**
@@ -57,7 +64,7 @@ class RequestController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -69,7 +76,7 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -80,13 +87,21 @@ class RequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 
     // custom
 
     public function approve($id)
     {
-        //
+        $order = Order::where('id', $id)->first();
+
+        // update order
+        $order = Order::find($order['id']);
+        $order->order_status_id = 1;
+        $order->save();
+
+        // toast()->success('Approve has been success');
+        return redirect()->route('member.request.index');
     }
 }

@@ -91,4 +91,4 @@
   </div>
 </section>
 
-@endsection
+@endsections

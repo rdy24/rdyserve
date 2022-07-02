@@ -13,7 +13,7 @@ class UpdateMyOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class UpdateMyOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'buyer_id' => 'required|integer',
+            'service_id' => 'required|integer',
+            'freelancer_id' => 'required|integer',
+            'file' => 'nullable|mimes:zip',
+            'note' => 'required|string|max:5000',
+            'expired' => 'required|date',
+            'order_status_id' => 'nullable|integer',
         ];
     }
 }

@@ -32,24 +32,24 @@
       <!-- Right Column -->
       <div class="w-full lg:w-1/2 text-center lg:justify-start justify-center flex pr-0">
         <img class="bottom-0 lg:block lg:right-24 md:right-16 sm:right-8 right-8 w-75"
-          src="{{ asset('assets/hero-image.png') }}" alt="" />
+          src="{{ asset('/assets/hero-image.png') }}" alt="" />
       </div>
     </div>
     <div class="lg:mb-20 mb-10 flex sm:space-x-4 space-x-1">
       <div class="flex-1 flex items-center justify-center py-3 px-6">
-        <img src="{{ url('assets/images/brand-logo/netflix.svg') }}" alt="">
+        <img src="{{ asset('assets/images/brand-logo/netflix.svg') }}" alt="">
       </div>
       <div class="flex-1 flex items-center justify-center py-3 px-6">
-        <img src="{{ url('assets/images/brand-logo/amazon.svg') }}" alt="">
+        <img src="{{ asset('assets/images/brand-logo/amazon.svg') }}" alt="">
       </div>
       <div class="flex-1 flex items-center justify-center py-3 px-6">
-        <img src="{{ url('assets/images/brand-logo/uber.svg') }}" alt="">
+        <img src="{{ asset('assets/images/brand-logo/uber.svg') }}" alt="">
       </div>
       <div class="flex-1 flex items-center justify-center py-3 px-6">
-        <img src="{{ url('assets/images/brand-logo/grab.svg') }}" alt="">
+        <img src="{{ asset('assets/images/brand-logo/grab.svg') }}" alt="">
       </div>
       <div class="flex-1 flex items-center justify-center py-3 px-6">
-        <img src="{{ url('assets/images/brand-logo/google.svg') }}" alt="">
+        <img src="{{ asset('assets/images/brand-logo/google.svg') }}" alt="">
       </div>
     </div>
   </div>
@@ -65,10 +65,13 @@
           Featured Services</h2>
       </div>
       <div class="flex overflow-x-scroll pb-10 hide-scroll-bar dragscroll -mx-3">
-        @include('components.Landing.service')
-        @include('components.Landing.service')
-        @include('components.Landing.service')
-        @include('components.Landing.service')
+        <div class="flex flex-nowrap">
+          @forelse ($services as $item)
+          @include('components.landing.service')
+          @empty
+          {{-- empty --}}
+          @endforelse
+        </div>
 
       </div>
     </div>
